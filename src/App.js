@@ -26,9 +26,20 @@ function App() {
     );
   }
   const { company, title, dates, duties } = jobs[index];
-  const renderDuties = duties.map((duty, index) => {
+  const renderJobs = jobs.map((job, key) => {
     return (
-      <div className="job-desc">
+      <button
+        onClick={() => setIndex(key)}
+        key={job.id}
+        className={`job-btn ${index === key ? "active-btn" : ""}`}
+      >
+        {job.company}
+      </button>
+    );
+  });
+  const renderDuties = duties.map((duty, key) => {
+    return (
+      <div className="job-desc" key={key}>
         <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
         <p>{duty}</p>
       </div>
@@ -40,13 +51,14 @@ function App() {
         <h2>Experience</h2>
         <div className="underline"></div>
       </div>
-      <div className="job-center">
+      <div className="jobs-center">
+        <div className="btn-container">{renderJobs}</div>
         <article className="job-info">
           <h3>{title}</h3>
           <h4>{company}</h4>
           <p className="job-date">{dates}</p>
+          {renderDuties}
         </article>
-        {renderDuties}
       </div>
     </section>
   );
